@@ -36,13 +36,13 @@ import ServiceDetails from "./pages/ServiceDetails";
 // ===============================
 // OTHER PUBLIC PAGES
 // ===============================
-// import Industries from "./pages/Industries";
-// import Projects from "./pages/Projects";
-// import ProjectDetails from "./pages/ProjectDetails";
-// import Brands from "./pages/Brands";
-// import Gallery from "./pages/Gallery";
+//import Industries from "./pages/Industries";
+//import Projects from "./pages/Projects";
+//import ProjectDetails from "./pages/ProjectDetails";
+//import Brands from "./pages/Brands";
+//import Gallery from "./pages/Gallery";
 import Blogs from "./pages/Blogs";
-// import Careers from "./pages/Careers";
+//import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 
 // ===============================
@@ -57,24 +57,14 @@ import "./MobileIntro.css";
 
 function MobileBrandIntro() {
   return (
-    <main
-      className="mobile-brand-intro"
-      role="status"
-      aria-label="JAY ELECTRONICS"
-    >
+    <main className="mobile-brand-intro" role="status" aria-label="JAY ELECTRONICS">
       <div className="mobile-brand-intro-content">
         <div className="mobile-brand-intro-mark" aria-hidden="true">
           JE
         </div>
-
-        <span className="mobile-brand-intro-overline">
-          INTEGRATED TECHNOLOGY SINCE 1989
-        </span>
-
+        <span className="mobile-brand-intro-overline">INTEGRATED TECHNOLOGY SINCE 1989</span>
         <h1>JAY ELECTRONICS</h1>
-
         <p>PRIVATE LIMITED</p>
-
         <div className="mobile-brand-intro-tagline">
           <span>SECURE</span>
           <i />
@@ -82,7 +72,6 @@ function MobileBrandIntro() {
           <i />
           <span>PROTECT</span>
         </div>
-
         <div className="mobile-brand-intro-progress" aria-hidden="true">
           <span />
         </div>
@@ -98,9 +87,7 @@ function SiteLayout({ children }) {
   return (
     <>
       {!isAdminRoute && <Navbar />}
-
       {isAdminRoute ? children : <main>{children}</main>}
-
       {!isAdminRoute && <FloatingButtons />}
       {!isAdminRoute && <Footer />}
     </>
@@ -108,42 +95,26 @@ function SiteLayout({ children }) {
 }
 
 function App() {
-  const [showMobileIntro, setShowMobileIntro] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.location.pathname === "/" &&
-      window.matchMedia("(max-width: 768px)").matches
+  const [showMobileIntro, setShowMobileIntro] = useState(() =>
+    typeof window !== "undefined" &&
+    window.location.pathname === "/" &&
+    window.matchMedia("(max-width: 768px)").matches
   );
 
   useEffect(() => {
     if (!showMobileIntro) return undefined;
 
-    const timer = window.setTimeout(
-      () => setShowMobileIntro(false),
-      1500
-    );
-
-    const mobileViewport = window.matchMedia(
-      "(max-width: 768px)"
-    );
-
+    const timer = window.setTimeout(() => setShowMobileIntro(false), 1500);
+    const mobileViewport = window.matchMedia("(max-width: 768px)");
     const dismissOnDesktop = (event) => {
-      if (!event.matches) {
-        setShowMobileIntro(false);
-      }
+      if (!event.matches) setShowMobileIntro(false);
     };
 
-    mobileViewport.addEventListener(
-      "change",
-      dismissOnDesktop
-    );
+    mobileViewport.addEventListener("change", dismissOnDesktop);
 
     return () => {
       window.clearTimeout(timer);
-      mobileViewport.removeEventListener(
-        "change",
-        dismissOnDesktop
-      );
+      mobileViewport.removeEventListener("change", dismissOnDesktop);
     };
   }, [showMobileIntro]);
 
@@ -152,107 +123,190 @@ function App() {
       {showMobileIntro ? (
         <MobileBrandIntro />
       ) : (
-        <SiteLayout>
-          <Routes>
+        <>
 
-            {/* =========================
-                HOME
-            ========================== */}
-            <Route path="/" element={<Home />} />
+      <SiteLayout>
 
-            {/* =========================
-                ABOUT US
-            ========================== */}
+        <Routes>
 
-            <Route path="/about" element={<About />} />
+          {/* =========================
+              HOME
+          ========================== */}
 
-            <Route
-              path="/about/company-profile"
-              element={<CompanyProfile />}
-            />
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-            <Route
-              path="/about/our-story"
-              element={<OurStory />}
-            />
 
-            <Route
-              path="/about/vision-mission"
-              element={<VisionMission />}
-            />
+          {/* =========================
+              ABOUT US
+          ========================== */}
 
-            <Route
-              path="/about/core-values"
-              element={<CoreValues />}
-            />
+          {/* About Us Overview */}
+          <Route
+            path="/about"
+            element={<About />}
+          />
 
-            <Route
-              path="/about/leadership"
-              element={<Leadership />}
-            />
+          {/* Company Profile */}
+          <Route
+            path="/about/company-profile"
+            element={<CompanyProfile />}
+          />
 
-            <Route
-              path="/about/our-team"
-              element={<OurTeam />}
-            />
+          {/* Our Story */}
+          <Route
+            path="/about/our-story"
+            element={<OurStory />}
+          />
 
-            {/* =========================
-                SOLUTIONS
-            ========================== */}
+          {/* Vision & Mission */}
+          <Route
+            path="/about/vision-mission"
+            element={<VisionMission />}
+          />
 
-            <Route
-              path="/solutions"
-              element={<Solutions />}
-            />
+          {/* Core Values */}
+          <Route
+            path="/about/core-values"
+            element={<CoreValues />}
+          />
 
-            <Route
-              path="/solutions/:slug"
-              element={<ServiceDetails />}
-            />
+          {/* Leadership */}
+          <Route
+            path="/about/leadership"
+            element={<Leadership />}
+          />
 
-            {/* =========================
-                BLOGS
-            ========================== */}
+          {/* Our Team */}
+          <Route
+            path="/about/our-team"
+            element={<OurTeam />}
+          />
 
-            <Route
-              path="/blogs"
-              element={<Blogs />}
-            />
 
-            {/* =========================
-                CONTACT
-            ========================== */}
+          {/* =========================
+              SOLUTIONS
+          ========================== */}
 
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
+          {/* All Solutions */}
+          <Route
+            path="/solutions"
+            element={<Solutions />}
+          />
 
-            {/* =========================
-                ADMIN LOGIN
-            ========================== */}
+          {/* Individual Solution */}
+          <Route
+            path="/solutions/:slug"
+            element={<ServiceDetails />}
+          />
 
-            <Route
-              path="/admin/login"
-              element={<AdminLogin />}
-            />
 
-            {/* =========================
-                PROTECTED ADMIN DASHBOARD
-            ========================== */}
+          {/* =========================
+              INDUSTRIES
+          ========================== }
 
-            <Route
-              path="/admin"
-              element={
-                <ProtectedAdminRoute>
-                  <AdminDashboard />
-                </ProtectedAdminRoute>
-              }
-            />
+          <Route
+            path="/industries"
+            element={<Industries />}
+          />
 
-          </Routes>
-        </SiteLayout>
+
+          {/* =========================
+              PROJECTS
+          ========================== }
+
+          <Route
+            path="/projects"
+            element={<Projects />}
+          />
+
+          <Route
+            path="/projects/:slug"
+            element={<ProjectDetails />}
+          />
+
+
+          {/* =========================
+              BRANDS
+          ========================== }
+
+          <Route
+            path="/brands"
+            element={<Brands />}
+          />
+
+
+          {/* =========================
+              GALLERY
+          ========================== }
+
+          <Route
+            path="/gallery"
+            element={<Gallery />}
+          />
+
+
+          { =========================
+              BLOGS
+          ========================== }
+
+          <Route
+            path="/blogs"
+            element={<Blogs />}
+          />
+
+
+          {/* =========================
+              CAREERS
+          ========================== */}
+
+          
+
+          {/* =========================
+              CONTACT
+          ========================== */}
+
+          <Route
+            path="/blogs"
+            element={<Blogs />}
+          />
+
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+
+
+          {/* =========================
+              ADMIN LOGIN
+          ========================== */}
+
+          <Route
+            path="/admin/login"
+            element={<AdminLogin />}
+          />
+
+
+          {/* =========================
+              PROTECTED ADMIN DASHBOARD
+          ========================== */}
+
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute>
+                <AdminDashboard />
+              </ProtectedAdminRoute>
+            }
+          />
+
+        </Routes>
+      </SiteLayout>
+        </>
       )}
+
     </BrowserRouter>
   );
 }
